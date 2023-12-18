@@ -2,7 +2,6 @@
 
 namespace TypiCMS\Modules\PageOptions;
 
-use Illuminate\Support\Facades\Artisan;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -13,7 +12,7 @@ use TypiCMS\Modules\PageOptions\Components\Image;
 use TypiCMS\Modules\PageOptions\Composers\PageTemplateOptionsComposer;
 use TypiCMS\Modules\PageOptions\Composers\PublicPageOptionsComposer;
 use TypiCMS\Modules\PageOptions\Models\PageOption;
-use TypiCMS\Modules\PageOptions\Observers\PageoptionsArrayObserver;
+use TypiCMS\Modules\PageOptions\Observers\PageOptionsArrayObserver;
 use TypiCMS\Modules\PageOptions\Observers\PageOptionsObserver;
 
 class PageOptionsServiceProvider extends PackageServiceProvider
@@ -45,6 +44,6 @@ class PageOptionsServiceProvider extends PackageServiceProvider
         parent::packageBooted();
 
         Page::observe(new PageOptionsObserver());
-        PageOption::observe(new PageoptionsArrayObserver());
+        PageOption::observe(new PageOptionsArrayObserver());
     }
 }
