@@ -45,6 +45,6 @@ class PageOptionsServiceProvider extends PackageServiceProvider
         parent::packageBooted();
 
         Page::observe(new PageOptionsObserver());
-        PageOption::observe(new PageoptionsArrayObserver());
+        PageOption::observe(new PageOptionsArrayObserver());
     }
 }
