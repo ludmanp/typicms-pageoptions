@@ -32,17 +32,16 @@ class PageOptionsServiceProvider extends PackageServiceProvider
             ->hasViewComposer('page-options::admin.*', PageTemplateOptionsComposer::class)
             ->hasViewComposer('pages::public.*', PublicPageOptionsComposer::class)
             ->hasViewComponents('pageoptions', Image::class, File::class, AdminForm::class)
-            ->hasInstallCommand(function(InstallCommand $command) {
+            ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishMigrations()
                     ->askToRunMigrations()
-                    ->endWith(function(InstallCommand $command) {
+                    ->endWith(function (InstallCommand $command) {
                         $exitCode = Artisan::call('vendor:publish', [
-                            '--tag' => 'page-options-views'
+                            '--tag' => 'page-options-views',
                         ]);
                         $command->info('page-options views are published');
-                    })
-                ;
+                    });
 
             });
     }

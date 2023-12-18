@@ -1,6 +1,6 @@
 <?php
 
-namespace  TypiCMS\Modules\PageOptions\Models;
+namespace TypiCMS\Modules\PageOptions\Models;
 
 use Laracasts\Presenter\PresentableTrait;
 use TypiCMS\Modules\Core\Models\Base;
@@ -13,5 +13,4 @@ class PageOption extends Base
     protected $presenter = ModulePresenter::class;
 
     protected $casts = ['options' => 'array'];
-
 }

@@ -4,7 +4,6 @@ namespace TypiCMS\Modules\PageOptions\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use TypiCMS\Modules\PageOptions\PageOptionsServiceProvider;
 
 class TestCase extends Orchestra
 {

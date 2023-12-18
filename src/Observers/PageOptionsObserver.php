@@ -1,6 +1,5 @@
 <?php
 
-
 namespace TypiCMS\Modules\PageOptions\Observers;
 
 use Illuminate\Database\Eloquent\Model;
@@ -15,11 +14,11 @@ class PageOptionsObserver
 
     public function saved(Model $model)
     {
-        if(!optional(request())->has('options')){
+        if (! optional(request())->has('options')) {
             return;
         }
         $pageOptions = PageOption::query()->where('page_id', $model->id)->first();
-        if (!$pageOptions) {
+        if (! $pageOptions) {
             $pageOptions = new PageOption();
         }
         $pageOptions->page_id = $model->id;

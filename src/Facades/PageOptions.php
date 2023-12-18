@@ -7,6 +7,7 @@ use TypiCMS\Modules\PageOptions\Models\PageOption;
 
 /**
  * @see PageOption
+ *
  * @mixin PageOption
  */
 class PageOptions extends Facade

@@ -1,12 +1,12 @@
 <?php
 
-if (!function_exists('nameToInput')) {
+if (! function_exists('nameToInput')) {
     function nameToInput(string $name): string
     {
         return implode(
             '',
             array_map(function ($el) {
-                return '[' . $el . ']';
+                return '['.$el.']';
             }, explode('.', $name))
         );
     }

@@ -12,13 +12,15 @@ class File extends Component
         public string $name,
         public Model $model,
         public ?string $label = null,
-    ) {}
+    ) {
+    }
 
     public function render()
     {
-        if(data_get($this->model->options, $this->name)){
+        if (data_get($this->model->options, $this->name)) {
             $file = FileModel::find(data_get($this->model->options, $this->name));
         }
-        return view('page-options::components.file', ['file' => $file ?? 'null',]);
+
+        return view('page-options::components.file', ['file' => $file ?? 'null']);
     }
 }

@@ -11,7 +11,7 @@ class AdminForm extends Component
 
     public function __construct(
         public Model $model
-    ){
+    ) {
         $this->template = optional($this->model ?? null)->template ?: 'default';
     }
 
