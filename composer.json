@@ -1,6 +1,6 @@
 {
     "name": "ludmanp/typicms-pageoptions",
-    "description": "Allow to add mor options to Page in TypiCMS",
+    "description": "Allow to add more parameters to a Page in TypiCMS",
     "keywords": [
         "Mark Leidman",
         "laravel",
@@ -40,7 +40,10 @@
         "psr-4": {
             "TypiCMS\\Modules\\PageOptions\\": "src/",
             "TypiCMS\\Modules\\PageOptions\\Database\\Factories\\": "database/factories/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

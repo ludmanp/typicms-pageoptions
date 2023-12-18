@@ -2,12 +2,16 @@
 
 namespace TypiCMS\Modules\PageOptions;
 
+use Illuminate\Support\Facades\Artisan;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use TypiCMS\Modules\Core\Models\Page;
-use TypiCMS\Modules\Pageoptions\Composers\PageTemplateOptionsComposer;
-use TypiCMS\Modules\Pageoptions\Composers\PublicPageOptionsComposer;
+use TypiCMS\Modules\PageOptions\Components\AdminForm;
+use TypiCMS\Modules\PageOptions\Components\File;
+use TypiCMS\Modules\PageOptions\Components\Image;
+use TypiCMS\Modules\PageOptions\Composers\PageTemplateOptionsComposer;
+use TypiCMS\Modules\PageOptions\Composers\PublicPageOptionsComposer;
 use TypiCMS\Modules\PageOptions\Models\PageOption;
 use TypiCMS\Modules\PageOptions\Observers\PageoptionsArrayObserver;
 use TypiCMS\Modules\PageOptions\Observers\PageOptionsObserver;
@@ -27,10 +31,19 @@ class PageOptionsServiceProvider extends PackageServiceProvider
             ->hasMigration('create_page_options_table')
             ->hasViewComposer('page-options::admin.*', PageTemplateOptionsComposer::class)
             ->hasViewComposer('pages::public.*', PublicPageOptionsComposer::class)
+            ->hasViewComponents('pageoptions', Image::class, File::class, AdminForm::class)
             ->hasInstallCommand(function(InstallCommand $command) {
                 $command
                     ->publishMigrations()
-                    ->askToRunMigrations();
+                    ->askToRunMigrations()
+                    ->endWith(function(InstallCommand $command) {
+                        $exitCode = Artisan::call('vendor:publish', [
+                            '--tag' => 'page-options-views'
+                        ]);
+                        $command->info('page-options views are published');
+                    })
+                ;
+
             });
     }
 

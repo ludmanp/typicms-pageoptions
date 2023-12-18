@@ -1,19 +1,9 @@
-# Allow to add mor options to Page in TypiCMS
+# PageOptions for TypiCMS
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/ludmanp/typicms-pageoptions.svg?style=flat-square)](https://packagist.org/packages/ludmanp/typicms-pageoptions)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/ludmanp/typicms-pageoptions/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/ludmanp/typicms-pageoptions/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/ludmanp/typicms-pageoptions/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/ludmanp/typicms-pageoptions/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/ludmanp/typicms-pageoptions.svg?style=flat-square)](https://packagist.org/packages/ludmanp/typicms-pageoptions)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/typicms-pageoptions.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/typicms-pageoptions)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+Allow to extend TypiCMS Page properties according to page templates.
 
 ## Installation
 
@@ -23,24 +13,18 @@ You can install the package via composer:
 composer require ludmanp/typicms-pageoptions
 ```
 
-You can publish and run the migrations with:
+To prepare for usage you can run
 
 ```bash
-php artisan vendor:publish --tag="typicms-pageoptions-migrations"
+php artisan page-options:install
+```
+The command will publish and run the migrations.  
+
+You can alternatively run separate commands to do these operations:
+
+```bash
+php artisan vendor:publish --tag="page-options-migrations"
 php artisan migrate
-```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="typicms-pageoptions-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
 ```
 
 Optionally, you can publish the views using
@@ -51,28 +35,88 @@ php artisan vendor:publish --tag="typicms-pageoptions-views"
 
 ## Usage
 
+### Admin
+
+Include 
 ```php
-$pageOptions = new Ludmanp\TypiCMS\PageOptions();
-echo $pageOptions->echoPhrase('Hello, Mark Leidman!');
+<x-pageoptions-admin-form :model="$model" />
+```
+into `resources/viwes/vendor/pages/admin/_from.blade.php`. 
+
+`$model` is the current Page model
+
+Create blade file in `resources/viwes/vendor/page-options/admin` directory with page tempalate name. 
+For example `default.blade.php`
+
+To add options you can use, for example,
+
+```php
+{!! BootForm::text(__('Description'), 'options[description]') !!}
+{!! TranslatableBootForm::text(__('Phone number'), 'options[phone][number]') !!}
 ```
 
-## Testing
+To include specific images, use
 
-```bash
-composer test
+```php
+<x-pageoptions-image :model="$model" name="preview_image_id" label="Preview image"/>
+<x-pageoptions-image :model="$model" name="phone.icon_id" label="Phone icon"/>
 ```
 
-## Changelog
+`name` is option's name, use dots to make multilevel array.
+`label` is optional, but recommended to distinguish from other image fields 
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+The same way you can add file fields
 
-## Contributing
+```php
+<x-pageoptions-file :model="$model" name="specification" label="Specification"/>
+```
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+### Public
 
-## Security Vulnerabilities
+To output PageOptions use in page template (`pages/public/*.blade/php`)
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+To output simple option use
+
+```php
+{{ $pageOptions->present()->option('phone') }}
+```
+
+To output translatable option use
+
+```php
+{{ $pageOptions->present()->optionTranslated('company.name') }}
+```
+
+There is available optional locale parameter
+
+```php
+{{ $pageOptions->present()->optionTranslated('company.name', 'en') }}
+```
+
+To output image use
+
+```php
+
+<img src="{{ $pageOptions->present()->optionsImage('contact.image') }}"
+    alt="{{ optional($pageOptions->present()->optionsFile('contact.image'))->alt_attribute ?? 'Contacts' }}"/>
+```
+
+Additional parameters `width`, `height` and `options` are available, like in presenter's `image` method.
+
+To get file model use. 
+
+```php
+
+$pageOptions->present()->optionsFile('contact.file')
+```
+
+As you can see above it is available also for images to get `alt_attribute` for example. 
+
+To make link to file you can write like following
+
+```php
+<a href="{{ optional($pageOptions->present()->optionsFile('contact.file'))->url }}">File</a>
+```
 
 ## Credits
 

@@ -15,9 +15,6 @@ class PageOptionsObserver
 
     public function saved(Model $model)
     {
-        if (optional(request())->get('id') != $model->id) {
-            return;
-        }
         if(!optional(request())->has('options')){
             return;
         }

@@ -9,9 +9,14 @@ use TypiCMS\Modules\Core\Models\File;
 
 class ModulePresenter extends Presenter
 {
-    public function local($key, $default = null)
+    public function option($key, $default = null)
     {
-        return data_get($this->entity->options, $key . '.' . config('app.locale'), $default);
+        return data_get($this->entity->options, $key, $default);
+    }
+
+    public function optionTranslated($key, $default = null, $locale = null)
+    {
+        return $this->option($key . '.' . ($locale ?: config('app.locale')), $default);
     }
 
     public function optionsImage($key, $width = null, $height = null, array $options = [])
@@ -19,9 +24,7 @@ class ModulePresenter extends Presenter
         $path = '';
 
         if($image = $this->optionsFile($key)){
-            if($image){
-                $path = $image->path;
-            }
+            $path = $image->path;
         }
 
         if (!Storage::exists($path)) {
@@ -40,7 +43,7 @@ class ModulePresenter extends Presenter
         $file = null;
         if(data_get($this->entity->options, $key)){
             $file = File::find(data_get($this->entity->options, $key));
-        };
+        }
         return $file;
     }
 }
