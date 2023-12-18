@@ -35,13 +35,7 @@ class PageOptionsServiceProvider extends PackageServiceProvider
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishMigrations()
-                    ->askToRunMigrations()
-                    ->endWith(function (InstallCommand $command) {
-                        $exitCode = Artisan::call('vendor:publish', [
-                            '--tag' => 'page-options-views',
-                        ]);
-                        $command->info('page-options views are published');
-                    });
+                    ->askToRunMigrations();
 
             });
     }
