@@ -2,6 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/ludmanp/typicms-pageoptions.svg?style=flat-square)](https://packagist.org/packages/ludmanp/typicms-pageoptions)
 [![Total Downloads](https://img.shields.io/packagist/dt/ludmanp/typicms-pageoptions.svg?style=flat-square)](https://packagist.org/packages/ludmanp/typicms-pageoptions)
+[![MIT Licence](https://img.shields.io/packagist/l/ludmanp/typicms-pageoptions.svg?style=flat-square)](https://packagist.org/packages/ludmanp/typicms-pageoptions)
 
 Allow to extend TypiCMS Page properties according to page templates.
 
