@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "bkwld/croppa": "^6.0",
+        "bkwld/croppa": "^7.0",
         "genealabs/laravel-model-caching": "^0.13.4",
         "illuminate/contracts": "^10.0",
         "laracasts/presenter": "^0.2.6",
