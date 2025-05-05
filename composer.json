@@ -18,23 +18,17 @@
     "require": {
         "php": "^8.1",
         "bkwld/croppa": "^7.0",
-        "genealabs/laravel-model-caching": "^0.13.4",
-        "illuminate/contracts": "^10.0",
-        "laracasts/presenter": "^0.2.6",
+        "genealabs/laravel-model-caching": "^12.0",
+        "laracasts/presenter": "^0.2.8",
         "spatie/laravel-package-tools": "^1.14.0",
-        "spatie/laravel-translatable": "^6.5",
-        "typicms/core": "^11.0",
-        "typicms/nestablecollection": "^3.0"
+        "spatie/laravel-translatable": "^6.11",
+        "typicms/core": "^13.0",
+        "typicms/nestablecollection": "^5.0"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest",
         "laravel/pint": "^1.0",
-        "nunomaduro/collision": "^7.8",
-        "larastan/larastan": "^2.0.1",
-        "orchestra/testbench": "^8.8",
-        "pestphp/pest": "^2.20",
-        "pestphp/pest-plugin-arch": "^2.0",
-        "pestphp/pest-plugin-laravel": "^2.0"
+        "orchestra/testbench": "*",
+        "roave/security-advisories": "dev-latest"
     },
     "autoload": {
         "psr-4": {
@@ -63,10 +57,10 @@
             "@composer run build",
             "@php vendor/bin/testbench serve"
         ],
-        "analyse": "vendor/bin/phpstan analyse",
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
-        "format": "vendor/bin/pint"
+        "analyse": "vendor__/bin/phpstan analyse",
+        "test": "vendor__/bin/pest",
+        "test-coverage": "vendor__/bin/pest --coverage",
+        "format": "vendor__/bin/pint"
     },
     "config": {
         "sort-packages": true,

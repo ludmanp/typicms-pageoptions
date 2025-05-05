@@ -7,6 +7,6 @@ docs
 phpunit.xml
 phpstan.neon
 testbench.yaml
-vendor
+vendor__
 node_modules
 *.zip
